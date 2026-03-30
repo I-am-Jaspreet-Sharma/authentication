@@ -1,5 +1,6 @@
 import sgMail from "@sendgrid/mail";
 
+sgMail.setDataResidency('eu');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const sendMail = async (to, subject, html) => {
