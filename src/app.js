@@ -1,6 +1,7 @@
 import cookieParser from "cookie-parser";
 import express from "express";
 import authRoute from "./modules/auth/auth.routes.js";
+import ApiError from "./common/utils/api-error.js";
 
 const app = express();
 // Middlewares
