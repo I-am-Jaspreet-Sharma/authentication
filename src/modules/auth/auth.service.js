@@ -28,7 +28,7 @@ const register = async ({name, email, password, role}) => {
 const verifyEmail = async (token) => {
     if(!token) throw ApiError.badRequest("Invalid Token");
     const hashedToken = hashToken(token);
-    const user = await User.findOne({verficationToken: hashedToken}).select("+verficationToken");
+    const user = await User.findOne({verificationToken: hashedToken}).select("+verficationToken");
     if(!user) throw ApiError.notFound("User not found");
     user.isVerified = true;
     user.verificationToken = undefined;
