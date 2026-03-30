@@ -18,7 +18,7 @@ const sendMail = async (to, subject, html) => {
   });
 };
 const sendVerificationMail = async (to, token) => {
-  const url = `${process.env.CLIENT_URL}/verify/${token}`;
+  const url = `${process.env.CLIENT_URL}/api/auth/verify/${token}`;
   await sendMail(
     to,
     "Verify your email",
@@ -26,7 +26,7 @@ const sendVerificationMail = async (to, token) => {
   );
 };
 const sendResetPasswordMail = async (to, token) => {
-  const url = `${process.env.CLIENT_URL}/new-password/${token}`;
+  const url = `${process.env.CLIENT_URL}/api/auth/new-password/${token}`;
   await sendMail(
     to,
     "Reset your password",
