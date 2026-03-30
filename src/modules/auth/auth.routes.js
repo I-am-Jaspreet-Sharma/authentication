@@ -10,7 +10,7 @@ import NewPasswordDto from "./dto/new-password.dto.js";
 const router = Router();
 
 router.post("/register", validate(RegisterDto), authControllers.register);
-router.post("/verify/:token", authControllers.verifyEmail);
+router.get("/verify/:token", authControllers.verifyEmail);
 router.post("/login", validate(LoginDto), authControllers.login);
 router.post("/refresh", authControllers.refresh);
 router.post("/forgot-password", validate(ForgotPasswordDto), authControllers.forgotPassword);
