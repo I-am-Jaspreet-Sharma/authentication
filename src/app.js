@@ -11,7 +11,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", authRoute)
 
-app.all("{*path}", (req, res) => {
-  throw ApiError.notFound(`Route ${req.originalUrl} not found`);
-});
+// app.all("{*path}", (req, res) => {
+//   throw ApiError.notFound(`Route ${req.originalUrl} not found`);
+// });
 export default app;
