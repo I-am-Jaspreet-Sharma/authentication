@@ -29,7 +29,7 @@ const verifyEmail = async (token) => {
     if(!token) throw ApiError.badRequest("Invalid Token");
     const hashedToken = hashToken(token);
     const user = await User.findOne({verficationToken: hashedToken}).select("+verficationToken");
-    if(!user) throw ApiError.notFound("User not found");
+    if(!user) throw ApiError.unauthorized("User not found");
     user.isVerified = true;
     user.verficationToken = undefined;
     await user.save({validateBeforeSave: false});
