@@ -1,28 +1,23 @@
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
 
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: Number(process.env.SMTP_PORT) === 465,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-});
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 const sendMail = async (to, subject, html) => {
   try {
-    const info = await transporter.sendMail({
-      from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
+    const msg = {
       to,
+      from: process.env.SMTP_FROM_EMAIL,
       subject,
       html,
-    });
+    };
 
-    console.log("EMAIL SENT:", info);
+    const response = await sgMail.send(msg);
+    console.log("EMAIL SENT:", response[0].statusCode);
   } catch (err) {
-    console.error("EMAIL ERROR:", err);
+    console.error("EMAIL ERROR:", err.response?.body || err.message);
   }
 };
+
 const sendVerificationMail = async (to, token) => {
   const url = `${process.env.CLIENT_URL}/api/auth/verify/${token}`;
   await sendMail(
