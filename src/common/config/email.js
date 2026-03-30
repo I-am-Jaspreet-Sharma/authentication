@@ -2,20 +2,26 @@ import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: false,
+    port: Number(process.env.SMTP_PORT),
+    secure: Number(process.env.SMTP_PORT) === 465,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
 });
 const sendMail = async (to, subject, html) => {
-  await transporter.sendMail({
-    from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
-    to,
-    subject,
-    html,
-  });
+  try {
+    const info = await transporter.sendMail({
+      from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
+      to,
+      subject,
+      html,
+    });
+
+    console.log("EMAIL SENT:", info);
+  } catch (err) {
+    console.error("EMAIL ERROR:", err);
+  }
 };
 const sendVerificationMail = async (to, token) => {
   const url = `${process.env.CLIENT_URL}/api/auth/verify/${token}`;
