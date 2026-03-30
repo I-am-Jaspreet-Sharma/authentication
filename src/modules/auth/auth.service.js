@@ -31,7 +31,7 @@ const verifyEmail = async (token) => {
     const user = await User.findOne({verficationToken: hashedToken}).select("+verficationToken");
     if(!user) throw ApiError.notFound("User not found");
     user.isVerified = true;
-    user.verficationToken = undefined;
+    user.verificationToken = undefined;
     await user.save({validateBeforeSave: false});
 };
 
