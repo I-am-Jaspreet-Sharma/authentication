@@ -26,6 +26,7 @@ const sendVerificationMail = async (to, token) => {
   const url = `${process.env.CLIENT_URL}/api/auth/verify/${token}`;
   await sendMail(
     to,
+<<<<<<< HEAD
     "Verify your email address",
     `
     <div style="font-family: Arial, sans-serif; background-color:#f6f9fc; padding:40px 0;">
@@ -80,6 +81,10 @@ const sendVerificationMail = async (to, token) => {
     </div>
     `
 
+=======
+    "Verify your email",
+    `<h2>Welcome!</h2><p>Click <a href="${url}">here</a> to verify your email.</p>`,
+>>>>>>> parent of a3bc7fb (feat: update email templates for verification and password reset with improved styling)
   );
 };
 const sendResetPasswordMail = async (to, token) => {
@@ -87,6 +92,7 @@ const sendResetPasswordMail = async (to, token) => {
   await sendMail(
     to,
     "Reset your password",
+<<<<<<< HEAD
     `
     <div style="font-family: Arial, sans-serif; background-color:#f6f9fc; padding:40px 0;">
       <table align="center" width="520" style="background:#ffffff; padding:30px; border-radius:10px;">
@@ -140,6 +146,9 @@ const sendResetPasswordMail = async (to, token) => {
     </div>
     `
 
+=======
+    `<h2>Password Reset</h2><p>Click <a href="${url}">here</a> to reset your password. This link expires in 15 minutes.</p>`,
+>>>>>>> parent of a3bc7fb (feat: update email templates for verification and password reset with improved styling)
   );
 };
 
