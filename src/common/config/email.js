@@ -1,10 +1,12 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "cec231163.cse.cec@cgc.edu.in",
-    pass: process.env.GOOGLE_APP_PASSWORD, // The 16-character App Password
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
   },
 });
 const sendMail = async (to, subject, html) => {
